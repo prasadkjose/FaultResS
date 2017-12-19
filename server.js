@@ -3,6 +3,7 @@ const hbs = require('hbs');
  var mysql = require('mysql');
 var path = require('path');
 
+const port = process.env.PORT || 3000;
 var app = express();
 
 var con = mysql.createConnection({
@@ -46,6 +47,6 @@ app.get('/home', (req, res) => {
 
 });
 
-app.listen(8080, () => {
-  console.log('Server is up on port 8080');
+app.listen(port, () => {
+  console.log('Server is up on port' + port);
 });
