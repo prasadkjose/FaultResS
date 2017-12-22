@@ -9,8 +9,7 @@
     "ng-gentelella": "^0.2.6",
     "path": "^0.12.7",
     "express" : "3.10.10",
-    "hbs" : "3.10.10"
-  },
+   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
