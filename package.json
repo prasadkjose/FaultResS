@@ -8,7 +8,7 @@
     "handlebars": "^4.0.11",
     "ng-gentelella": "^0.2.6",
     "path": "^0.12.7",
-    "express" : "3.10.10"
+    "express" : "4.16.2"
    },
   "devDependencies": {},
   "scripts": {
