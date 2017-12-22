@@ -21,7 +21,7 @@ app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 app.use('/ng-gentelella', express.static(path.join(__dirname, 'node_modules', 'ng-gentelella')));
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
   var dataList= [];
   con.query("SELECT * FROM test", function (err, rows, fields) {
     if (err) throw err;
