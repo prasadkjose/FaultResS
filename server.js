@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
                       dataList.push(data);
                   }
 
-                     
+                    client.end();
                   res.render('home.hbs', {
                     pageTitle: 'FaultResS- Fault Resolution System',
                     dataList : dataList   });
