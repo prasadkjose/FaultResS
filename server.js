@@ -21,11 +21,10 @@ app.use('/ng-gentelella', express.static(path.join(__dirname, 'node_modules', 'n
 
 app.get('/', (req, res) => {
   var dataList= [];
-  client.query("SELECT * FROM test", function (err, rows, fields) {
+  client.query("SELECT * FROM test", function (err, rows) {
     if (err) throw err;
     for (var i = 0 ; i < rows.length; i++)
                    {
-                    console.log(rows);
                       // Create an object to save current row's data
                       var data = {
 
@@ -36,6 +35,8 @@ app.get('/', (req, res) => {
                       // Add object into array
                       dataList.push(data);
                   }
+
+                    client.end();
                   res.render('home.hbs', {
                     pageTitle: 'FaultResS- Fault Resolution System',
                     dataList : dataList   });
