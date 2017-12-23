@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     if (err) throw err;
     for (var i = 0 ; i < rows.length; i++)
                    {
-
+                    console.log(rows);
                       // Create an object to save current row's data
                       var data = {
 
