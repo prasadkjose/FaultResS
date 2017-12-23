@@ -19,11 +19,32 @@ app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 app.use('/ng-gentelella', express.static(path.join(__dirname, 'node_modules', 'ng-gentelella')));
 
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
+app.get('/', (req, res) => {
+  var dataList= [];
+  client.query("SELECT * FROM test", function (err, rows) {
+    if (err) throw err;
+    for (var i = 0 ; i < rows.length; i++)
+                   {
+                      // Create an object to save current row's data
+                      var data = {
+
+                          'Line':rows[i].line,
+                          'Section':rows[i].section,
+                          'category':rows[i].category
+                      }
+                      // Add object into array
+                      dataList.push(data);
+                  }
+
+                    client.end();
+                  res.render('home.hbs', {
+                    pageTitle: 'FaultResS- Fault Resolution System',
+                    dataList : dataList   });
+
+    });
+
+
+});
 
 app.listen(port, () => {
   console.log('Server is up on port' + port);
