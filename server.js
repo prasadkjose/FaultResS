@@ -17,7 +17,6 @@ client.connect();
 app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/public'));
-app.use('/ng-gentelella', express.static(path.join(__dirname, 'node_modules', 'ng-gentelella')));
 
 app.get('/', (req, res) => {
   var dataList= [];
@@ -25,6 +24,7 @@ app.get('/', (req, res) => {
     if (err) throw err;
     for (var i = 0 ; i < rows.length; i++)
                    {
+                     console.log(row.length)
                       // Create an object to save current row's data
                       var data = {
 
