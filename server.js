@@ -35,9 +35,11 @@ app.get('/', (req, res) => {
                       dataList.push(data);
                   }
 
+                  data1=row.length;
+
                     client.end();
                   res.render('home.hbs', {
-                    pageTitle: row.length,
+                    pageTitle: 'data1',
                     dataList : dataList   });
 
     });
