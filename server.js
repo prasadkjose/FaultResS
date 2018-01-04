@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
     if (err) throw err;
     for (var i = 0 ; i < rows.length; i++)
                    {
-                     console.log(row.length)
                       // Create an object to save current row's data
                       var data = {
 
@@ -38,7 +37,7 @@ app.get('/', (req, res) => {
 
                     client.end();
                   res.render('home.hbs', {
-                    pageTitle: 'FaultResS- Fault Resolution System',
+                    pageTitle: row.length,
                     dataList : dataList   });
 
     });
