@@ -1,12 +1,17 @@
 const express = require('express');
 const hbs = require('hbs');
-const { pg } = require('pg');
+const { Client } = require('pg');
 var path = require('path');
 
 const port = process.env.PORT || 3000;
 var app = express();
 
-var connectionString = "postgres://jogekjsshjwbgb:ce0812c7781b5c929b09c2aef4e197fb1fb9a05ae8d5dd529c27cfcd807ce707@ec2-54-235-244-185.compute-1.amazonaws.com:5432/d5tp3snp1afq9h";
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+client.connect();
+
 
 
 app.set('view engine', 'hbs');
@@ -15,7 +20,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
   var dataList= [];
-  pg.connect(connectionString, function(err, client, done) {
   client.query("SELECT * FROM test", function (err, rows) {
     if (err) throw err;
     for (var i = 0 ; i < rows.length; i++)
@@ -37,7 +41,7 @@ app.get('/', (req, res) => {
                     dataList : dataList   });
 
     });
-});
+
 
 });
 
