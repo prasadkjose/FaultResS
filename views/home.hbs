@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/util.css">
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <link rel="stylesheet" href="main.css">
     <script type="application/javascript">
-
+        setInterval('$("#demo").load(location.href + " #demo")', 5000);
     </script>
 
 </head>
@@ -23,28 +24,50 @@
         <div class="container-fluid" style="width: 100%;">
             <div class="navbar-header">
               <img src="logo.png" class="navbar-brand logo">
-                <p class="navbar-brand title " style="color: #whitesmoke;">{{pageTitle}}</p>
+                <p class="navbar-brand title " style="color: #whitesmoke;">{{name}}  |  Admin Panel</p>
             </div>
         </div>
     </nav>
-    <div class="body1 container">
 
-        {{#each dataList}}
-        <div class="well">
-        <p>
-           {{Section}}
-        </p>
-        <p>
-          {{category}}
-        </p>
-        <p>
-          {{Line}}
-        </p>
-       </div>
-        {{/each}}
+
+    <div class="body1 container">
+      <div class="limiter">
+        <div class="container-table100">
+          <div class="wrap-table100">
+            <div class="table100">
+              <table id="demo">
+                <thead>
+                  <tr class="table100-head">
+                    <th class="column1">Timestamp</th>
+                    <th class="column2">Category</th>
+                    <th class="column3">Line</th>
+                      <th class="column4">Section</th>
+
+                  </tr>
+                </thead>
+                {{#each dataList}}
+                <tbody >
+
+
+                    <tr>
+                      <td class="column1">{{timestamp}}</td>
+                      <td class="column2">  {{category}}</td>
+                      <td class="column3">{{Line}}</td>
+                      <td class="column4">{{Section}}</td>
+
+                    </tr>
+
+                </tbody>  {{/each}}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
 
     </div>
+
 
 
 

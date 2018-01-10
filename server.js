@@ -1,32 +1,36 @@
 const express = require('express');
 const hbs = require('hbs');
-const { Client } = require('pg');
+var mysql = require('mysql');
 var path = require('path');
 
-const port = process.env.PORT || 3000;
 var app = express();
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "faultress"
 });
-client.connect();
 
+
+const port = process.env.PORT || 3000;
 
 
 app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/public'));
+app.use('/ng-gentelella', express.static(path.join(__dirname, 'node_modules', 'ng-gentelella')));
 
 app.get('/', (req, res) => {
   var dataList= [];
-  client.query("SELECT * FROM test", function (err, rows) {
+  con.query("SELECT * FROM test", function (err, rows, fields) {
     if (err) throw err;
     for (var i = 0 ; i < rows.length; i++)
                    {
+
                       // Create an object to save current row's data
                       var data = {
-
+                          'timestamp':rows[i].timestamp,
                           'Line':rows[i].line,
                           'Section':rows[i].section,
                           'category':rows[i].category
@@ -34,16 +38,16 @@ app.get('/', (req, res) => {
                       // Add object into array
                       dataList.push(data);
                   }
-
-                    client.end();
                   res.render('home.hbs', {
                     pageTitle: 'FaultResS- Fault Resolution System',
+                    name: 'Fault Resolution System',
                     dataList : dataList   });
 
     });
 
 
 });
+
 
 app.listen(port, () => {
   console.log('Server is up on port' + port);
