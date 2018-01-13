@@ -1,19 +1,29 @@
 const express = require('express');
 const hbs = require('hbs');
-var mysql = require('mysql');
-var path = require('path');
+ var path = require('path');
+const fs = require('fs');
+var admin = require('./routes/admin.js');
+var login = require('./routes/login.js');
+var Technician = require('./routes/Technician.js');
 
 var app = express();
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "faultress"
-});
 
 
 const port = process.env.PORT || 3000;
+
+const partialsDir = __dirname + '/views/partials';
+const filenames = fs.readdirSync(partialsDir);
+
+filenames.forEach(function (filename) {
+  const matches = /^([^.]+).hbs$/.exec(filename);
+  if (!matches) {
+    return;
+  }
+  const name = matches[1];
+  const template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
+  hbs.registerPartial(name, template);
+});
 
 
 app.set('view engine', 'hbs');
@@ -21,34 +31,12 @@ app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 app.use('/ng-gentelella', express.static(path.join(__dirname, 'node_modules', 'ng-gentelella')));
 
-app.get('/', (req, res) => {
-  var dataList= [];
-  con.query("SELECT * FROM test", function (err, rows, fields) {
-    if (err) throw err;
-    for (var i = 0 ; i < rows.length; i++)
-                   {
-
-                      // Create an object to save current row's data
-                      var data = {
-                          'timestamp':rows[i].timestamp,
-                          'Line':rows[i].line,
-                          'Section':rows[i].section,
-                          'category':rows[i].category
-                      }
-                      // Add object into array
-                      dataList.push(data);
-                  }
-                  res.render('home.hbs', {
-                    pageTitle: 'FaultResS- Fault Resolution System',
-                    name: 'Fault Resolution System',
-                    dataList : dataList   });
-
-    });
+app.use('/admin', admin);
+app.use('/login', login);
+app.use('/tech', Technician);
 
 
-});
-
-
-app.listen(port, () => {
+//give public IP next to port and open up port
+app.listen(port , () => {
   console.log('Server is up on port' + port);
 });

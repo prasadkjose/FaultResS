@@ -7,14 +7,14 @@
 
 
     <script type="application/javascript">
-      setInterval('$("#demo").load(location.href + " #demo")', 5000);
+        setInterval('$("#demo").load(location.href + " #demo")', 5000);
     </script>
     <div class="body1 container">
-      <div class="limiter">
+      <div class="limiter" >
         <div class="container-table100">
           <div class="wrap-table100">
-            <div class="table100 col-md-12 col-sm-12">
-              <table id="demo" class="">
+            <div class="table100">
+              <table id="demo">
                 <thead>
                   <tr class="table100-head">
                     <th class="column1">Time of Registration</th>
@@ -22,9 +22,7 @@
                     <th class="column3">Line</th>
                       <th class="column4">Section</th>
                       <th class="column5">Status</th>
-                      <th class="column6">Time of Ack</th>
-                      <th class="column6">Time of Completion</th>
-                      <th class="column6" style="  text-align: center;">Technician</th>
+
 
 
                   </tr>
@@ -33,14 +31,13 @@
                 <tbody >
 
 
-                    <tr onclick="clickrow()" id="row-data">
+                    <tr>
                       <td class="column1">{{tor}}</td>
                       <td class="column2">  {{category}}</td>
                       <td class="column3">{{Line}}</td>
                       <td class="column4">{{Section}}</td>
                       <td class="column5" style="color:{{color}};">{{status}}</td>
-                      <td class="column6">{{toa}}</td>
-                      <td class="column6">{{toc}}</td>
+
 
 
 
@@ -56,10 +53,8 @@
 
 
     </div>
-    <script type="text/javascript">
 
 
-    </script>
 
 
 
