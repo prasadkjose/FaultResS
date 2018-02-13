@@ -5,14 +5,54 @@
 
 <body>
 
+  <script>
 
-    <script type="application/javascript">
-      setInterval('$("#demo").load(location.href + " #demo")', 5000);
-    </script>
+
+</script>
+  <!--  <script type="application/javascript">
+      setInterval('$("#demo").load(location.href + " #demo")', 5000);//sends a get request again
+    </script> -->
+    <div class="page-top row">
+      <div class=" col-md-1 ">
+          <button href="/" class="btn btn-default">Home</button>
+      </div>
+      <div class="page-top-form col-md-3">
+        <form method="post" action="/date">
+          <p1>Enter Fault Date</p1>
+
+          <input type="date" class="page-top-input"   placeholder="Enter Date" name="date" />
+          <input type="submit" class="date-submit btn btn-default" value="Submit">
+        </form>
+      </div>
+      <div class="page-top-form col-md-3">
+        <form method="post" action="/tech">
+          <p1>Enter Technician Name</p1>
+
+          <input type="text" class="page-top-input"   placeholder="Technician" name="technician" />
+          <input type="submit" class="date-submit btn btn-default" value="Submit">
+        </form>
+      </div>
+      <div class="page-top-form col-md-3">
+        <form method="post" action="/admin">
+          <p1>Enter Section</p1>
+
+          <input type="text" class="page-top-input"   placeholder="Section" name="date" />
+          <input type="submit" class="date-submit btn btn-default" value="Submit">
+        </form>
+      </div>
+    </div>
+
     <div class="body1 container">
       <div class="limiter">
+
+
+        <br />
+        <br />
+        <br />
+
         <div class="container-table100">
           <div class="wrap-table100">
+
             <div class="table100 col-md-12 col-sm-12">
               <table id="demo" class="">
                 <thead>
@@ -20,7 +60,7 @@
                     <th class="column1">Time of Registration</th>
                     <th class="column2">Category</th>
                     <th class="column3">Line</th>
-                      <th class="column4">Section</th>
+                     
                       <th class="column5">Status</th>
                       <th class="column6">Time of Ack</th>
                       <th class="column6">Time of Completion</th>
@@ -37,10 +77,12 @@
                       <td class="column1">{{tor}}</td>
                       <td class="column2">  {{category}}</td>
                       <td class="column3">{{Line}}</td>
-                      <td class="column4">{{Section}}</td>
+                     
                       <td class="column5" style="color:{{color}};">{{status}}</td>
                       <td class="column6">{{toa}}</td>
                       <td class="column6">{{toc}}</td>
+                      <td class="column6">{{tech}}</td>
+
 
 
 

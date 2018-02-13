@@ -5,12 +5,17 @@ const fs = require('fs');
 var admin = require('./routes/admin.js');
 var login = require('./routes/login.js');
 var Technician = require('./routes/Technician.js');
+var home = require('./routes/index.js');
+var bodyParser = require('body-parser');
+
 
 var app = express();
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 
-
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8081;
 
 const partialsDir = __dirname + '/views/partials';
 const filenames = fs.readdirSync(partialsDir);
@@ -29,14 +34,16 @@ filenames.forEach(function (filename) {
 app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/public'));
-app.use('/ng-gentelella', express.static(path.join(__dirname, 'node_modules', 'ng-gentelella')));
 
 app.use('/admin', admin);
 app.use('/login', login);
-app.use('/tech', Technician);
+app.use('/tech-panel', Technician);
+app.use('/', home);
 
+app.post('/date',admin);
+app.post('/tech',admin);
 
 //give public IP next to port and open up port
-app.listen(port , () => {
+app.listen(port, () => {
   console.log('Server is up on port' + port);
 });

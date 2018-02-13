@@ -30,11 +30,11 @@ router.get('/', (req, res) => {
                       var data = {
                           'tor':tor,
                           'Line':rows[i].line,
-                          'Section':rows[i].section,
+                          
                           'category':rows[i].category,
 
-                          'status':status,
-                          'color':color
+                          
+                          
                       }
                       // Add object into array
                       dataList.push(data);
