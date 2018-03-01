@@ -2,6 +2,11 @@
     {{> header}}
 
 <style>
+
+    #usr
+    {
+        width: 75%;
+    }
     select
     {            margin-top: 2vh;
 
@@ -15,10 +20,15 @@
 <div class="container">
     <center>
 
-        <form>
+        <form method="POST" action="/comment">
+                    <input type="hidden" value="{{b}}" name="b" />
+
+              <input type="text" class="form-control" id="usr" name="TechnicianName" placeholder="Technician Name"/>
+              <br>
+              <br>
              <label for="comment">Select Specific Fault:</label>
- <br>
-            <select class="btn btn-primary dropdown-toggle">
+                <br>
+            <select name="Fault" class="btn btn-primary dropdown-toggle">
                 <ul class="dropdown-menu">
                      <option value="Fault1">Fault1</option>
                     <option value="Fault2">Fault2</option>
@@ -28,17 +38,15 @@
                 </ul>
            
             </select>   
-<br>
-<br>
-<br>
-<br>
-
-
-         <div class="form-group">
-            <label for="comment">Comment:</label>
-            <textarea class="form-control" rows="5" id="comment"></textarea>
-        </div> 
-        <button type="button" class="btn btn-success">Submit    </button>
+                <br>
+                <br>
+                <br>
+                <br>
+              <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea name="Comment" class="form-control" rows="5" id="comment"></textarea>
+              </div> 
+            <button class="btn btn-success">Submit    </button>
 
             
         </form>

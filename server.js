@@ -44,6 +44,7 @@ app.use('/mqtt', mqtt1)
 app.post('/date',admin);
 app.post('/tech',admin);
 app.post('/ack',Technician);
+app.post('/comment',Technician);
 
 //give public IP next to port and open up port
 app.listen(port, () => {
