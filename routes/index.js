@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 var dataList=[];
 var a= [];
 var b =[];
-  con.query("SELECT * FROM test ", function (err, rows, fields)
+  con.query("SELECT * FROM test order by tor desc limit 1 ", function (err, rows, fields)
                                   {
                           if (err) throw err;
 

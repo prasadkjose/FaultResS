@@ -18,6 +18,8 @@
     "live-server": "^1.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
+    "moment-timezone": "^0.5.14",
+    "mqtt": "^2.15.3",
     "mysql": "^2.15.0",
     "ng-gentelella": "^0.2.6",
     "node-red": "^0.17.5",

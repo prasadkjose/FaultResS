@@ -2,6 +2,7 @@
 <html lang="en">
 
 {{> header}}
+    <link rel="stylesheet" href="tech.css">
 
 <body>
 
@@ -20,6 +21,7 @@
                     <th class="column1">Time of Registration</th>
                     <th class="column2">Category</th>
                     <th class="column3">Line</th>
+                   
                      
  
 
@@ -34,6 +36,11 @@
                       <td class="column1">{{tor}}</td>
                       <td class="column2">  {{category}}</td>
                       <td class="column3">{{Line}}</td>
+                       <td > <form method="post" action="/ack">
+                       <input type="hidden" value="{{ack}}" name="a" />
+        
+           <button class="ack-bt btn  btn-primary">Acknowledge</button>
+    </form></td>
                     
  
 

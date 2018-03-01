@@ -398,7 +398,7 @@ tbody tr:hover {
 
   }
  
-  table tbody tr td:nth-child(4):before {
+  /* table tbody tr td:nth-child(4):before {
     content: "Status-";
     padding-right: 100px;
 
@@ -417,7 +417,7 @@ tbody tr:hover {
     content: "Technician -";
     padding-right: 100px;
 
-  }
+  } */
   .column4,
   .column5,
   .column6 {

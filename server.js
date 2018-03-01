@@ -7,6 +7,7 @@ var login = require('./routes/login.js');
 var Technician = require('./routes/Technician.js');
 var home = require('./routes/index.js');
 var bodyParser = require('body-parser');
+var mqtt1 = require('./routes/mqtt.js');
 
 
 var app = express();
@@ -39,9 +40,10 @@ app.use('/admin', admin);
 app.use('/login', login);
 app.use('/tech-panel', Technician);
 app.use('/', home);
-
+app.use('/mqtt', mqtt1)
 app.post('/date',admin);
 app.post('/tech',admin);
+app.post('/ack',Technician);
 
 //give public IP next to port and open up port
 app.listen(port, () => {
