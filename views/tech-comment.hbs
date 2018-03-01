@@ -2,7 +2,11 @@
     {{> header}}
 
 <style>
+    html
+    {
+        font-family: 'roboto';
 
+    }
     #usr
     {
         width: 75%;
@@ -14,12 +18,24 @@
 
 
    }
-
+    p{
+color: #2b2b2bb0;
+     }
+     .rules{
+    border: 2px solid #2b2b2b31;
+    padding: 1vh 1vw;
+         }
 </style>
 
 <div class="container">
     <center>
-
+        <div class="rules">
+          <p>Kindly fill in the details of the fault and click SUBMIT. </p>
+          <p>The Ticket will be closed once you click on SUBMIT.</p>
+            
+        </div>
+      
+        <br>
         <form method="POST" action="/comment">
                     <input type="hidden" value="{{b}}" name="b" />
 
