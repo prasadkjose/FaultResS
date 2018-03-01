@@ -73,7 +73,7 @@ router.get('/', (req, res) => {
           // res.json({msd: err})
           res.render('tech-comment.hbs', {
             pageTitle: 'Technician Page',
-            name: 'Fault Resolution System   |   Technician Panel'
+            name: 'Fault Details'
             });
         
         });
