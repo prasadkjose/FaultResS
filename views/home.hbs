@@ -13,11 +13,13 @@
   <!--  <script type="application/javascript">
       setInterval('$("#demo").load(location.href + " #demo")', 5000);//sends a get request again
     </script> -->
+    
+    
     <div class="page-top row">
       <div class=" col-md-1 ">
-          <button href="/" class="btn btn-default">Home</button>
+          {{!-- <button href="/" class="btn btn-default">Home</button> --}}
       </div>
-      <div class="page-top-form col-md-3">
+      <div class="page-top-form col-md-3 c  ">
         <form method="post" action="/date">
           <p1>Enter Fault Date</p1>
 
@@ -29,15 +31,15 @@
         <form method="post" action="/tech">
           <p1>Enter Technician Name</p1>
 
-          <input type="text" class="page-top-input"   placeholder="Technician" name="technician" />
+          <input type="text" class="page-top-input"   placeholder="Ex John" name="technician" />
           <input type="submit" class="date-submit btn btn-default" value="Submit">
         </form>
       </div>
       <div class="page-top-form col-md-3">
-        <form method="post" action="/admin">
-          <p1>Enter Section</p1>
+        <form method="post" action="/line">
+          <p1>Enter Line</p1>
 
-          <input type="text" class="page-top-input"   placeholder="Section" name="date" />
+          <input type="text" class="page-top-input"   placeholder="Ex Filter1" name="line" />
           <input type="submit" class="date-submit btn btn-default" value="Submit">
         </form>
       </div>
@@ -55,7 +57,7 @@
           <div class="wrap-table100">
 
             <div class="table100 col-md-12 col-sm-12">
-              <table id="demo" class="">
+              <table id="mytable" class="">
                 <thead>
                   <tr class="table100-head">
                     <th class="column1">Time of Registration</th>
@@ -103,7 +105,10 @@
 
 
     </script>
+<script  >
 
+ 
+    </script>
 
 
 </body>

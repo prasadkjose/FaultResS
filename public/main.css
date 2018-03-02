@@ -1,5 +1,5 @@
 html, body   {
-    background: #576485;
+    background: #E9EBEE;
     font-family: 'Roboto';
 
 
@@ -20,7 +20,7 @@ html, body   {
 }
 .body1 {
     background: white;
-    box-shadow: 0 0 5px #576485;
+    box-shadow: 0 0 5px #E9EBEE;
     font-family: 'Roboto';
     font-size: 12px;
     line-height: 1.5;

@@ -43,6 +43,8 @@ app.use('/', home);
 app.use('/mqtt', mqtt1)
 app.post('/date',admin);
 app.post('/tech',admin);
+app.post('/line',admin);
+
 app.post('/ack',Technician);
 app.post('/comment',Technician);
 

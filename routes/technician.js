@@ -1,17 +1,41 @@
+var mqtt = require('mqtt');
+var client  = mqtt.connect(MQTT_ADDR,{protocolId: 'MQIsdp', protocolVersion: 3, connectTimeout:1000, debug:true});
+
 var express = require('express');
 var router = express.Router();
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
+
 
 var con = require('../db.js'); // importing my db conf from db.js
 var moment = require('moment');// timestamp formatter
 
-
-var MQTT_TOPIC          = "faultress/filter1";
+var MQTT_TOPIC          = "faultress/filter1/machine";
 var MQTT_ADDR           = "mqtt://192.168.1.5:1883";
 var MQTT_PORT           = 1883;
- 
-var mqtt = require('mqtt');
-var client  = mqtt.connect(MQTT_ADDR,{protocolId: 'MQIsdp', protocolVersion: 3, connectTimeout:1000, debug:true});
 
+
+var myEventHandler = function ()
+         {
+                client.on('connect', function () {
+                  client.subscribe(MQTT_TOPIC);
+                  client.publish(MQTT_TOPIC, '1');
+              });
+
+              client.on('message', function (topic, message) {
+                  // message is Buffer
+                  console.log(message.toString());
+                  client.end();
+              });
+
+              client.on('error', function(){
+                  console.log("ERROR")
+                  client.end()
+              });
+            console.log("success");
+        }
+
+eventEmitter.on('mqttcall', myEventHandler);
 
 router.get('/', (req, res) => {
           var dataList= [];
@@ -62,43 +86,36 @@ router.get('/', (req, res) => {
 
         });
 
-        router.post('/ack', (req,res) => {
+         
+  router.post('/ack', (req,res) => 
+        {
 
+          eventEmitter.emit('mqttcall');
 
             let a=req.body.a;
 
             let b = a.split(',');
-           con.query("UPDATE test SET toa = CURRENT_TIMESTAMP  WHERE line = '"+ b[0]+"' and category = '"+ b[1]+ "'", function(err)
-        {
-          // res.json({msd: err})
-          res.render('tech-comment.hbs', {
-            pageTitle: 'Technician Page',
-            name: 'Fault Details',
-            b: b
-            });
-        
-        });
+           con.query("UPDATE test SET toa = CURRENT_TIMESTAMP  WHERE line = '"+ b[0]+"' and status = 1 and category = '"+ b[1]+ "'", function(err)
+              {
+                // res.json({msd: err})
+                res.render('tech-comment.hbs', {
+                  pageTitle: 'Technician Page',
+                  name: 'Fault Details',
+                  b: b
+                  });
+
+
+
+              
+              });
           
         
-                      client.on('connect', function () {
-                        client.publish(MQTT_TOPIC, '1');
-                    });
-                    
-                    client.on('message', function (topic, message) {
-                        // message is Buffer
-                        console.log(message.toString());
-                        client.end();
-                    });
-                    
-                    client.on('error', function(){
-                        console.log("ERROR")
-                        client.end()
-                    })
-
         });
 
-        router.post('/comment', (req,res) => 
+
+ router.post('/comment', (req,res) => 
         {
+
               let TechnicianName= req.body.TechnicianName;
               let Fault= req.body.Fault;
               let Comment = req.body.Comment;
@@ -110,7 +127,7 @@ router.get('/', (req, res) => {
            let a=req.body.b;
 
            let b = a.split(',');
-           con.query("UPDATE test SET status= "+ 0 +" , toc = CURRENT_TIMESTAMP, technician ='"+TechnicianName+ "', fault = '"+Fault +"', comment='"+Comment+"' WHERE line = '"+ b[0]+"' and category = '"+ b[1]+ "'", function(err)
+           con.query("UPDATE test SET status= "+ 0 +" , toc = CURRENT_TIMESTAMP, technician ='"+TechnicianName+ "', fault = '"+Fault +"', comment='"+Comment+"' WHERE line = '"+ b[0]+"' and status = 1 and category = '"+ b[1]+ "'", function(err)
         {
           //  res.json({msd: err})
           var dataList= [];
