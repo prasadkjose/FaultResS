@@ -3,23 +3,23 @@ const hbs = require('hbs');
  var path = require('path');
 const fs = require('fs');
 var admin = require('./routes/admin.js');
-var login = require('./routes/login.js');
 var Technician = require('./routes/Technician.js');
-var home = require('./routes/index.js');
+var analysis = require('./routes/analysis.js');
 var bodyParser = require('body-parser');
 var mqtt1 = require('./routes/mqtt.js');
-
 
 var app = express();
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.set('view engine', 'hbs');
 
 const port = process.env.PORT || 8081;
 
 const partialsDir = __dirname + '/views/partials';
 const filenames = fs.readdirSync(partialsDir);
+app.use(express.static(__dirname + '/public'));
 
 filenames.forEach(function (filename) {
   const matches = /^([^.]+).hbs$/.exec(filename);
@@ -32,14 +32,11 @@ filenames.forEach(function (filename) {
 });
 
 
-app.set('view engine', 'hbs');
-
-app.use(express.static(__dirname + '/public'));
+ 
 
 app.use('/admin', admin);
-app.use('/login', login);
 app.use('/tech-panel', Technician);
-app.use('/', home);
+app.use('/analysis', analysis);
 app.use('/mqtt', mqtt1)
 app.post('/date',admin);
 app.post('/tech',admin);

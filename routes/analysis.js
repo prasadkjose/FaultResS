@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var con = require('../db.js'); // importing my db conf from db.js
 var _ = require('lodash');
+// var chart = require('../public/js/analysis.js');
 
 
 router.get('/', (req, res) => {
@@ -30,10 +31,9 @@ var b =[];
 
 
                           //    b=_.groupBy(a);
-                          res.render('index.hbs', {
-                          pageTitle: 'FaultResS- Fault Resolution System',
-                          name: 'Fault Resolution System | ',
-                          layout : 'partials/bar-count.hbs'
+                          res.render('analysis.hbs', {
+                          pageTitle: 'FaultResS- Analysis Page',
+                          name: 'Faultress | Analysis '
                           });
 
 
