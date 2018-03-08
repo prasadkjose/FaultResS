@@ -10,7 +10,7 @@ var router = express.Router();
 var con = require('../db.js'); // importing my db conf from db.js
 var moment = require('moment');// timestamp formatter
 
-var MQTT_ADDR           = "mqtt://192.168.1.5:1883";
+var MQTT_ADDR           = "mqtt://52.172.25.136:1883";
 var MQTT_PORT           = 1883;
 
 
