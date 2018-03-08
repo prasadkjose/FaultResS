@@ -4,30 +4,64 @@
 {{> header}}
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist-plugin-legend/0.6.2/chartist-plugin-legend.min.js"></script>
 
-    <script>
+     <link rel="stylesheet" href="charts.css">
+<style>
 
-
-      
-var data = {
-    // A labels array that can contain any sort of values
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-    // Our series array that contains series objects or in this case series data arrays
-    series: [
-      [5, 2, 4, 2, 0]
-    ]
-  };
-  
-  // Create a new line chart object where as first parameter we pass in a selector
-  // that is resolving to our chart container element. The Second parameter
-  // is the actual data object.
-  new Chartist.Line('.ct-chart', data);
-    </script>
+</style>
+   
 <body>
-  <div class="ct-chart ct-perfect-fourth"></div>
+    <div class="container body1">
+      <br> 
+      <div class="container" style="width:80%;" >
+        <center>
+        <h2>Whole Factory</h2>    
+            <br>
+            <div class="row">
+                <div class="col-md-8">
+                     <div id="graph-top" class="ct-chart ct-minor-sixth " ></div> 
+
+                </div>
+                <div class="col-md-4">
+                    <div class=" well">
+                    <h4 id="filter-factory-label"> </h4> 
+                    <h4 id="RFM-factory-label"> <h4> 
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </center>          
+      </div> 
+      <br> 
+      <div class="container" style="width:80%;" >
+        <center>
+        <h2>Whole Factory Downtime </h2>    
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="graph-Downtime" class="ct-chart ct-minor-sixth " ></div>      
+
+                </div>
+            </div>
+        </center>          
+      </div> 
+
+        <div id="pie-fault" class="ct-chart ct-square " ></div>  
+             
+    </div>
+      
 </body>
+
+
+
+
+
+
+
+ <script>
+  
+    </script>
 {{> footer}}
-
-
-
  </html>

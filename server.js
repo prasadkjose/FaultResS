@@ -7,6 +7,8 @@ var Technician = require('./routes/Technician.js');
 var analysis = require('./routes/analysis.js');
 var bodyParser = require('body-parser');
 var mqtt1 = require('./routes/mqtt.js');
+var device = require('./routes/device.js');
+
 
 var app = express();
 app.use(bodyParser.urlencoded({
@@ -37,10 +39,15 @@ filenames.forEach(function (filename) {
 app.use('/admin', admin);
 app.use('/tech-panel', Technician);
 app.use('/analysis', analysis);
-app.use('/mqtt', mqtt1)
+app.use('/mqtt', mqtt1);
+app.use('/device', device);
+ 
+
 app.post('/date',admin);
 app.post('/tech',admin);
 app.post('/line',admin);
+
+
 
 app.post('/ack',Technician);
 app.post('/comment',Technician);

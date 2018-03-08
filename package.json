@@ -13,6 +13,7 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "body-parser": "^1.18.2",
+    "chartist-plugin-legend": "^0.6.2",
     "events": "^2.0.0",
     "express": "^4.14.0",
     "hbs": "^4.0.0",

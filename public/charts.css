@@ -1,0 +1,21 @@
+
+
+/* First graph for whole factory */
+#graph-top{
+    padding-bottom: 10%;
+}
+.ct-series-a .ct-bar {
+    /* Colour of your bars */
+    stroke:#2b2b2b;
+    /* The width of your bars */
+    stroke-width: 20px;
+   
+   }
+   .ct-label{
+    font-size: 16px;
+    color: black;
+
+   }
+
+
+ 

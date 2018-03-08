@@ -36,15 +36,14 @@ router.get('/', (req, res) => {
                           //formats the timestamps
                     tor =  moment(rows[i].tor).format("dddd, MMMM Do YYYY, h:mm:ss a");
                     tor1 =  rows[i].tor;
-                    let ack = rows[i].line.concat("/",rows[i].category);
+                    let ack = rows[i].line.concat("/",rows[i].line_no,"/",rows[i].category);
 
                       // Create an object to save current row's data
                       var data = {
                           'tor':tor,
                           'ack' : ack,
                           'Line':rows[i].line,
-                          
-                          
+                          'LineNo':rows[i].line_no,                   
                           'category':rows[i].category,
 
                           
@@ -73,7 +72,7 @@ router.get('/', (req, res) => {
             var MQTT_TOPIC          = "faultress/ack" ;
           var ack = "Fault in " + a + " is acknowledged."
           client.publish(MQTT_TOPIC, ack);
-           con.query("UPDATE test SET toa = CURRENT_TIMESTAMP  WHERE line = '"+ b[0]+"' and status = 1 and category = '"+ b[1]+ "'", function(err)
+           con.query("UPDATE test SET toa = CURRENT_TIMESTAMP  WHERE line = '"+ b[0]+"' and line_no = '"+ b[1]+"' and status = 1 and category = '"+ b[2]+ "'", function(err)
               {
                 // res.json({msd: err})
                 res.render('tech-comment.hbs', {
@@ -105,7 +104,7 @@ router.get('/', (req, res) => {
            let a=req.body.b;
 
            let b = a.split('/');
-           con.query("UPDATE test SET status= "+ 0 +" , toc = CURRENT_TIMESTAMP, technician ='"+TechnicianName+ "', fault = '"+Fault +"', comment='"+Comment+"' WHERE line = '"+ b[0]+"' and status = 1 and category = '"+ b[1]+ "'", function(err)
+           con.query("UPDATE test SET status= "+ 0 +" , toc = CURRENT_TIMESTAMP, technician ='"+TechnicianName+ "', fault = '"+Fault +"', comment='"+Comment+"' WHERE line = '"+ b[0]+"' and line_no = '"+ b[1]+"'and status = 1 and category = '"+ b[2]+ "'", function(err)
         {
           //  res.json({msd: err})
           var dataList= [];
@@ -129,13 +128,14 @@ router.get('/', (req, res) => {
                           //formats the timestamps
                     tor =  moment(rows[i].tor).format("dddd, MMMM Do YYYY, h:mm:ss a");
                     tor1 =  rows[i].tor;
-                    let ack = rows[i].line.concat("/",rows[i].category);
+                    let ack = rows[i].line.concat("/",rows[i].line_no,"/",rows[i].category);
 
                       // Create an object to save current row's data
                       var data = {
                           'tor':tor,
                           'ack' : ack,
                           'Line':rows[i].line,
+                          'LineNo':rows[i].line_no,
                           
                           
                           'category':rows[i].category,

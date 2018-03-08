@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+        <meta charset="utf-8">
+
+
+{{> header}}
+ 
+    <link rel="stylesheet" href="/device.css">
+
+
+
+ <body>
+     <div class="container body1">
+         <center>
+         <div class="main well">
+             <div>
+                 <center>
+                 <h1>Controller for {{line}} - {{line_no}}</h1>
+                 </center> <br><br><br>
+             </div>
+             <div class="row">
+                 <div class="col-md-3">
+                     {{!-- <form method="POST" action="/device/mqtt">  --}}
+                        {{!-- <input type="hidden" value="hi" name="a" /> --}}
+                  <a id="SD"><button id="primary-button " >.</button></a>      
+
+                     {{!-- </form> --}}
+                    <h4 id="SDh1">Screw Driver</h4>
+                 </div>
+                 <div class="col-md-3">
+                  <a id="JF"><button id="primary-button " >.</button></a>      
+                    <h4>Jig And Fixture</h4>
+
+                 </div>
+                 <div class="col-md-3">
+                  <a id="machine"><button id="primary-button " >.</button></a>      
+                    <h4>Machine</h4>
+
+                 </div>
+                 <div class="col-md-3">
+                  <a id="fitting"><button id="primary-button " >.</button></a>      
+                    <h4>Fitting</h4>
+
+                 </div>
+             </div>
+
+         </div></center>
+ {{line}}
+ {{line_no}}
+      </div>
+ </body>
+
+ <script>
+   var line=  "{{line}}";
+ var line_no= "{{line_no}}";
+ // for screwDriver
+     $("#SD").on('click', (event) => {
+            event.preventDefault();
+           
+            // Getting the values
+             let data = {
+                 topic : line+"/"+line_no+"/Screw Driver" 
+
+             } 
+           
+            // Sending to our server
+            $.ajax({
+                url:"/device/mqtt",
+                method:"POST",
+                data: data
+                 
+            })
+            
+        
+            .catch((err) => {
+                console.log(err);
+            });
+        });
+
+ // for Jig and fixture
+
+        $("#JF").on('click', (event) => {
+            event.preventDefault();
+           
+            // Getting the values
+             let data = {
+                 topic : line+"/"+line_no+"/Jig and Fixture" 
+
+             } 
+           
+            // Sending to our server
+            $.ajax({
+                url:"/device/mqtt",
+                method:"POST",
+                data: data
+                
+            })
+             
+            .catch((err) => {
+                console.log(err);
+            });
+        });
+
+ // for machine
+
+        $("#machine").on('click', (event) => {
+            event.preventDefault();
+           
+            // Getting the values
+             let data = {
+                 topic : line+"/"+line_no+"/Machine" 
+
+             } 
+           
+            // Sending to our server
+            $.ajax({
+                url:"/device/mqtt",
+                method:"POST",
+                data: data
+                 
+            })
+             
+            .catch((err) => {
+                console.log(err);
+            });
+        });
+
+ // for fitting
+
+        $("#fitting").on('click', (event) => {
+            event.preventDefault();
+           
+            // Getting the values
+             let data = {
+                 topic : line+"/"+line_no+"/Fitting" 
+
+             } 
+           
+            // Sending to our server
+            $.ajax({
+                url:"/device/mqtt",
+                method:"POST",
+                data: data
+                 
+            })
+             
+            .catch((err) => {
+                console.log(err);
+            });
+        });
+</script>
+</html>

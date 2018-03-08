@@ -1,0 +1,13 @@
+button{
+background:    #3d85c6;
+background:    -webkit-linear-gradient(#3d85c6, #073763);
+background:    linear-gradient(#3d85c6, #073763);
+border-radius: 1000px;
+padding:       30px 41px;
+color:         #ffffff;
+ font:          normal 700 24px/1 "Calibri", sans-serif;
+text-align:    center;
+text-shadow:   1px 1px #000000;
+ 
+}
+

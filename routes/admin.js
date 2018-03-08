@@ -33,6 +33,7 @@ router.get('/', (req, res) => {
               var data = {
                   'tor':tor,
                   'Line':rows[i].line,
+                  'LineNo': rows[i].line_no,
                   'Section':rows[i].section,
                   'category':rows[i].category,
                   'toa' :  toa,
@@ -84,7 +85,7 @@ router.post('/date', (req,res) => {
                          var data = {
                              'tor':tor,
                              'Line':rows[i].line,
-                             
+                             'LineNo': rows[i].line_no,
                              'category':rows[i].category,
                              'toa' :  toa,
                              'toc':  toc,
@@ -135,6 +136,7 @@ router.post('/tech', (req,res) => {
                          var data = {
                              'tor':tor,
                              'Line':rows[i].line,
+                             'LineNo': rows[i].line_no,
                              'Section':rows[i].section,
                              'category':rows[i].category,
                              'toa' :  toa,
@@ -188,6 +190,7 @@ router.post('/line', (req,res) => {
                           var data = {
                               'tor':tor,
                               'Line':rows[i].line,
+                              'LineNo': rows[i].line_no,
                               'Section':rows[i].section,
                               'category':rows[i].category,
                               'toa' :  toa,
