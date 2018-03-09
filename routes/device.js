@@ -11,12 +11,13 @@ router.get('/', (req, res) => {
     res.send(req.params.a);
 });
 router.get('/:line/:no', (req, res) => {
-
+    let line = req.params.line;
+   let  line_no = req.params.no;
     res.render('device.hbs', {
-        pageTitle: 'FaultResS- Analysis Page',
+        pageTitle: 'FaultResS- Device',
         name: 'Faultress | Device Controller',
-        line: req.params.line,
-        line_no: req.params.no,
+        line: line,
+        line_no: line_no,
          });
     // res.send(req.params);
 });
@@ -30,11 +31,23 @@ router.post('/mqtt', (req, res) => {
     var MQTT_TOPIC          = "faultress/" +topic ;
 
     client.publish(MQTT_TOPIC, "1");
-
+    console.log("sent");
     // res to send stuff to the browser
 // res.json({ msg: "We receive your data", data: user });
 
 });
+
+router.get('/:line/:no/mqtt-ack', (req, res) => 
+{ 
+//     let line = req.params.line;
+//     let line_no = req.params.no;
+//     let MQTT_TOPIC = "faultress/ack/" + line + "/" + line_no +"/#";
+//     // let MQTT_TOPIC = "hi";
+//  let ack =  client.subscribe(MQTT_TOPIC, function (err,granted){
+//      console.log(granted);
+//  });
+//  res.send(ack);
+ });
 
 module.exports = router;
 

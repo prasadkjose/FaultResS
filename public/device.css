@@ -11,3 +11,10 @@ text-shadow:   1px 1px #000000;
  
 }
 
+.ack-well
+{
+    background-color: #073763;
+    width: 50%;
+    color: whitesmoke;
+    padding: 10px 20px;
+}

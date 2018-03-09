@@ -69,7 +69,7 @@ router.get('/', (req, res) => {
           let a=req.body.a;
 
             let b = a.split('/');
-            var MQTT_TOPIC          = "faultress/ack" ;
+            var MQTT_TOPIC          = "faultress/ack/" +a;
           var ack = "Fault in " + a + " is acknowledged."
           client.publish(MQTT_TOPIC, ack);
            con.query("UPDATE test SET toa = CURRENT_TIMESTAMP  WHERE line = '"+ b[0]+"' and line_no = '"+ b[1]+"' and status = 1 and category = '"+ b[2]+ "'", function(err)

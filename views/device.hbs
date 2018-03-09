@@ -6,7 +6,7 @@
 {{> header}}
  
     <link rel="stylesheet" href="/device.css">
-
+  
 
 
  <body>
@@ -44,7 +44,18 @@
                  </div>
              </div>
 
-         </div></center>
+         </div>
+         <div class="ack-div">
+               <div class="container well">
+                   <h3>Acknowledgement Message from Technician</h3>
+                   <div class="ack-well">
+                       <div id="ack"></div>
+                   </div>
+               </div> 
+
+         </div>
+         
+         </center>
  {{line}}
  {{line_no}}
       </div>
@@ -53,11 +64,20 @@
  <script>
    var line=  "{{line}}";
  var line_no= "{{line_no}}";
- 
+
+ function loadlink(){
+   var  link = "/device/"+line+"/"+line_no+"/mqtt-ack"
+    $('#ack').load(link, function () {
+   });
+}
+
+loadlink(); // This will run on page load
+setInterval(function(){
+    loadlink() // this will run after every 5 seconds
+}, 10000);
  // for screwDriver
      $("#SD").on('click', (event) => {
             event.preventDefault();
-           
             // Getting the values
              let data = {
                  topic : line+"/"+line_no+"/Screw Driver" 
@@ -150,4 +170,6 @@
             });
         });
 </script>
+
+
 </html>
