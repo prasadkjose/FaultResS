@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var mqtt = require('mqtt');
-var client  = mqtt.connect(MQTT_ADDR,{protocolId: 'MQIsdp', protocolVersion: 3, connectTimeout:1000, debug:true});
+var client = require('../mqtt.js'); // importing my mqtt conf from mqtt.js
 
-var MQTT_ADDR           = "mqtt://52.172.25.136:1883";
-var MQTT_PORT           = 1883;
+
+
 
 
 router.get('/', (req, res) => {
@@ -31,23 +30,59 @@ router.post('/mqtt', (req, res) => {
     var MQTT_TOPIC          = "faultress/" +topic ;
 
     client.publish(MQTT_TOPIC, "1");
-    console.log("sent");
+    // console.log("sent");
     // res to send stuff to the browser
 // res.json({ msg: "We receive your data", data: user });
 
 });
 
-router.get('/:line/:no/mqtt-ack', (req, res) => 
-{ 
-//     let line = req.params.line;
-//     let line_no = req.params.no;
-//     let MQTT_TOPIC = "faultress/ack/" + line + "/" + line_no +"/#";
-//     // let MQTT_TOPIC = "hi";
-//  let ack =  client.subscribe(MQTT_TOPIC, function (err,granted){
-//      console.log(granted);
-//  });
-//  res.send(ack);
- });
 
-module.exports = router;
+router.get('/mqtt-ack/:line/:no', (req, res) => 
+{
+    const line = req.params.line;
+    const line_no = req.params.no;
+    let MQTT_TOPIC = "ack/faultress/" + line + "/" + line_no;
+    res.writeHead(200, {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive'
+      });
+      res.write('\n');
+        // Timeout timer, send a comment line every 20 sec
+    var timer = setInterval(function() {
+        res.write('event: ping' + '\n\n');
+      }, 20000);
+  
+      client.subscribe(MQTT_TOPIC, function() {
+        client.on('message', function(topic, msg, pkt) {
+          //res.write("New message\n");
+          var json = msg;
+          res.write("data:" + json + "\n\n");
+        });
+      });
+
+});
+
+  
+  
+
+  
+//         router.get('/:line/:no/mqtt-ack', (req, res) => 
+//         { 
+//             let line = req.params.line;
+//             let line_no = req.params.no;
+//             let MQTT_TOPIC = "faultress/ack/" + line + "/" + line_no +"/#";
+
+            
+//     // let MQTT_TOPIC = "hi";
+// //     client.subscribe('test', function (topic, message)
+// //     {
+         
+// // console.log(message.toString());          
+// //     }); 
+//             //  res.send(ack);
+//   });
+  
+
+ module.exports = router;
 

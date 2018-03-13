@@ -1,5 +1,4 @@
-var mqtt = require('mqtt');
-var client  = mqtt.connect(MQTT_ADDR,{protocolId: 'MQIsdp', protocolVersion: 3, connectTimeout:1000, debug:true});
+var client = require('../mqtt.js'); // importing my mqtt conf from mqtt.js
 
 var express = require('express');
 var router = express.Router();
@@ -10,9 +9,7 @@ var router = express.Router();
 var con = require('../db.js'); // importing my db conf from db.js
 var moment = require('moment');// timestamp formatter
 
-var MQTT_ADDR           = "mqtt://52.172.25.136:1883";
-var MQTT_PORT           = 1883;
-
+ 
 
 router.get('/', (req, res) => {
           var dataList= [];
@@ -69,7 +66,7 @@ router.get('/', (req, res) => {
           let a=req.body.a;
 
             let b = a.split('/');
-            var MQTT_TOPIC          = "faultress/ack/" +a;
+            var MQTT_TOPIC          = "ack/faultress/" + b[0] + "/" + b[1];
           var ack = "Fault in " + a + " is acknowledged."
           client.publish(MQTT_TOPIC, ack);
            con.query("UPDATE test SET toa = CURRENT_TIMESTAMP  WHERE line = '"+ b[0]+"' and line_no = '"+ b[1]+"' and status = 1 and category = '"+ b[2]+ "'", function(err)

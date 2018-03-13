@@ -6,7 +6,9 @@
 {{> header}}
  
     <link rel="stylesheet" href="/device.css">
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+<script  type="text/javascript">
+</script> 
 
 
  <body>
@@ -19,7 +21,7 @@
                  </center> <br><br><br>
              </div>
              <div class="row">
-                 <div class="col-md-3">
+                 <div class="col-md-3 col-xs-3">
                      {{!-- <form method="POST" action="/device/mqtt">  --}}
                         {{!-- <input type="hidden" value="hi" name="a" /> --}}
                   <a id="SD"><button id="primary-button " >.</button></a>      
@@ -27,17 +29,17 @@
                      {{!-- </form> --}}
                     <h4 id="SDh1">Screw Driver</h4>
                  </div>
-                 <div class="col-md-3">
+                 <div class="col-md-3 col-xs-3">
                   <a id="JF"><button id="primary-button " >.</button></a>      
                     <h4>Jig And Fixture</h4>
 
                  </div>
-                 <div class="col-md-3">
+                 <div class="col-md-3 col-xs-3">
                   <a id="machine"><button id="primary-button " >.</button></a>      
                     <h4>Machine</h4>
 
                  </div>
-                 <div class="col-md-3">
+                 <div class="col-md-3 col-xs-3">
                   <a id="fitting"><button id="primary-button " >.</button></a>      
                     <h4>Fitting</h4>
 
@@ -49,7 +51,9 @@
                <div class="container well">
                    <h3>Acknowledgement Message from Technician</h3>
                    <div class="ack-well">
-                       <div id="ack"></div>
+                       <div id="messages">
+                           <p id="msgs" ></p>
+                       </div>
                    </div>
                </div> 
 
@@ -65,16 +69,16 @@
    var line=  "{{line}}";
  var line_no= "{{line_no}}";
 
- function loadlink(){
-   var  link = "/device/"+line+"/"+line_no+"/mqtt-ack"
-    $('#ack').load(link, function () {
-   });
-}
+      var es = new EventSource("/device/mqtt-ack/"+line+"/"+line_no);
+      es.onerror = function(e)  { console.error(e); };
+      es.onopen = function(e) { console.log("Open", e);};
+      es.onmessage = function(e) {
+        console.log("Mesage:", e);
+        var target = document.getElementById("msgs");
+        target.textContent = e.data;
+      };
 
-loadlink(); // This will run on page load
-setInterval(function(){
-    loadlink() // this will run after every 5 seconds
-}, 10000);
+
  // for screwDriver
      $("#SD").on('click', (event) => {
             event.preventDefault();
@@ -171,5 +175,20 @@ setInterval(function(){
         });
 </script>
 
+<script>
+ 
+</script>
+ 
+ </html>
 
-</html>
+{{!-- 
+ function loadlink(){
+   var  link = "/device/"+line+"/"+line_no+"/mqtt-ack"
+    $('#ack').load(link, function () {
+   });
+}
+
+loadlink(); // This will run on page load
+setInterval(function(){
+    loadlink() // this will run after every 5 seconds
+}, 10000); --}}
