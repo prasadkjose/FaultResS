@@ -18,3 +18,21 @@ text-shadow:   1px 1px #000000;
     color: whitesmoke;
     padding: 10px 20px;
 }
+select
+{
+    padding: 10px 50px;
+    margin: 2vh 1vw;
+}
+
+#lineinput
+{
+    padding: 10px 50px;
+    margin: 2vh 1vw;
+    
+}
+#font
+{
+    font-size: 30px;
+}
+
+ 

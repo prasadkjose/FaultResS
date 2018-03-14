@@ -8,6 +8,8 @@ var analysis = require('./routes/analysis.js');
 var bodyParser = require('body-parser');
 var mqtt1 = require('./routes/mqtt.js');
 var device = require('./routes/device.js');
+var date = require('./routes/date.js');
+
 
 
 var app = express();
@@ -41,18 +43,23 @@ app.use('/tech-panel', Technician);
 app.use('/analysis', analysis);
 app.use('/mqtt', mqtt1);
 app.use('/device', device);
+
  
 
 app.post('/date',admin);
 app.post('/tech',admin);
 app.post('/line',admin);
 
+app.use('/faultbydate',date);
+
+ 
+
 
 
 app.post('/ack',Technician);
 app.post('/comment',Technician);
 
-//give public IP next to port and open up port
+ //give public IP next to port and open up port
 app.listen(port, () => {
   console.log('Server is up on port' + port);
 });

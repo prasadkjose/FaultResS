@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+        <meta charset="utf-8">
+
+
+{{> header}}
+ 
+    <link rel="stylesheet" href="/device.css">
+<script  type="text/javascript">
+</script> 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+ <body>
+     <div class="container body1">
+        <div class="main well">
+            <center>
+                 <h3>Select the Line </h3>
+                 <form method="POST" action="/device/conf">
+               <i id="font" class="fas fa-industry"></i>
+                    <select placeholder="Select Line" name="line"> 
+                    <option value="Filter" name="Filter">Filter Line</option>
+                    <option value="RFM" name="RFM" >RFM Line</option>
+                    <option value="Packing" name="Packing">Packing Machine</option>
+                    <option value="ThermalCell" name="ThermalCell">Thermal Cell</option>
+                    <option value="716" name="716cor">7/16 Correction </option>
+                    </select><br><hr>
+                    <h3> Enter the Line Number</h3>
+                    <i id="font" class="fas fa-sort-numeric-up"></i>
+                     <input placeholder="Line Number" id="lineinput" type="number" name="no"><br>
+                    <button class="btn btn-primary">Submit</button>
+                 </form>             
+            </center>
+
+      
+
+         </div>
+ </body>

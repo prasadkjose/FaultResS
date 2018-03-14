@@ -14,41 +14,82 @@
 <body>
     <div class="container body1">
       <br> 
-      <div class="container" style="width:80%;" >
+      <div class="container" style="width:95%;" >
         <center>
-        <h2>Whole Factory</h2>    
-            <br>
+        <h2>Whole Factory</h2>
+        <h3>Statistics on   {{date}}</h3>    
+            <br><br>
+            <form method="POST" action="/faultbydate">
+                <input type="date" id="date" name="date">
+                <button id="dateSubmit">date</button>
+                
+            </form>
             <div class="row">
-                <div class="col-md-8">
-                     <div id="graph-top" class="ct-chart ct-minor-sixth " ></div> 
-
+                <div class="col-md-5">
+                    <div id="graph-top" class="ct-chart ct-minor-sixth " ></div> 
+                </div>
+                <div class="col-md-3">
+                    <ul id="faultByLineDay"> </ul><br>
+                    <ul id="faultByCategoryDay"> </ul>                 
                 </div>
                 <div class="col-md-4">
-                    <div class=" well">
-                    <h4 id="filter-factory-label"> </h4> 
-                    <h4 id="RFM-factory-label"> <h4> 
-                        
-                    </div>
+                    <div id="pie-cat-countbyline" class="ct-chart ct-square " ></div>
+                </div>
+            </div>
+            <hr>
+
+            
+            <h3>Weekly Statistics from {{week}}</h3><br><br>
+             <div class="row">
+                <div class="col-md-4">
+                    <div id="pie-cat-countbylineWeek" class="ct-chart ct-square " ></div>  
+                </div>
+                <div class="col-md-3">
+                    <ul id="faultByLineWeek"> </ul><br>
+                    <ul id="faultByCategoryWeek"> </ul>                 
+                </div>
+                <div class="col-md-5">
+                     <div id="graphFaultByLineWeek" class="ct-chart ct-minor-sixth " ></div>
+                </div>
+            </div>
+            <hr>
+
+
+             <h3>Monthly Statistics from  {{month}} </h3><br><br>
+             <div class="row">
+                <div class="col-md-5">
+                    <div id="graphFaultByLineMonth" class="ct-chart ct-minor-sixth " ></div>
+                </div>
+                <div class="col-md-3">
+                    <ul id="faultByLineMonth"> </ul><br>
+                    <ul id="faultByCategoryMonth"> </ul>                 
+                </div>
+                <div class="col-md-4">
+                    <div id="pie-cat-countbylineMonth" class="ct-chart ct-square " ></div>  
+                </div>
+            </div>
+            <hr>
+
+
+             <h3> Statistics from {{year}}</h3><br><br>
+             <div class="row">
+                <div class="col-md-4">
+                    <div id="pie-cat-countbylineYear" class="ct-chart ct-square " ></div>  
+                </div>
+                <div class="col-md-3">
+                    <ul id="faultByLineYear"> </ul><br>
+                    <ul id="faultByCategoryYear"> </ul>                 
+                </div>
+                <div class="col-md-5"> 
+                    <div id="graphFaultByLineYear" class="ct-chart ct-minor-sixth " ></div>
                 </div>
             </div>
             
         </center>          
       </div> 
       <br> 
-      <div class="container" style="width:80%;" >
-        <center>
-        <h2>Whole Factory Downtime </h2>    
-            <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="graph-Downtime" class="ct-chart ct-minor-sixth " ></div>      
+      
 
-                </div>
-            </div>
-        </center>          
-      </div> 
-
-        <div id="pie-fault" class="ct-chart ct-square " ></div>  
              
     </div>
       

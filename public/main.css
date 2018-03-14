@@ -1,9 +1,13 @@
-html, body   {
+html{
     background: #E9EBEE;
     font-family: 'Roboto';
+ 
 
+}
 
-
+body{
+  padding-top: 6em;
+  background: #E9EBEE;
 }
 .logo
 {

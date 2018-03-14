@@ -7,6 +7,18 @@ var _ = require('lodash');
 
 
 router.get('/', (req, res) => {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+    var monthly= mm-1;
+    var yearly = yyyy-1
+
+
+date = dd-1 + '/' + mm + '/' + yyyy;
+week = dd-7 + '/' + mm + '/' + yyyy;
+month = dd + '/' + monthly + '/' + yyyy;
+year = dd + '/' + monthly + '/' + yearly;
 
     // con.query("SELECT * FROM no ", function (err, rows, fields){
     //     var dataList=[];
@@ -24,8 +36,12 @@ router.get('/', (req, res) => {
     //         series: dataList1
     //     };                           
         res.render('analysis.hbs', {
-            pageTitle: 'FaultResS- Analysis Page',
-            name: 'Faultress | Analysis ',
+            pageTitle: 'FaultResS- Analytics Page',
+            name: 'Faultress | Analytics  ',
+            date : date,
+            week : week,
+            month : month,
+            year : year
              });
 
 
@@ -33,11 +49,11 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/chart1', (req, res) => {
+router.post('/daylinechart', (req, res) => {
     var dataList=[];
     var dataList1=[];
 
-    con.query(" SELECT count(line) AS count, line FROM test GROUP BY line ", function (err, rows, fields)
+    con.query(" SELECT count(line) AS count, line FROM test where date(tor) = DATE(NOW() - INTERVAL 1 DAY) GROUP BY line  ", function (err, rows, fields)
         {
         if (err) throw err;
         for (var i=0; i< rows.length; i++)
@@ -47,6 +63,7 @@ router.post('/chart1', (req, res) => {
                 dataList.push(no);
                 dataList1.push(val);
             }
+            // con.query(" SELECT count(line) AS count, line FROM test GROUP BY line ", function (err, rows, fields)
             var data = {
                 labels: dataList,
                 series: [dataList1]
@@ -59,45 +76,19 @@ router.post('/chart1', (req, res) => {
 });
 
 
-router.post('/chartDowntime', (req, res) => {
+router.post('/daycatpie', (req, res) => {
     var dataList=[];
     var dataList1=[];
 
-    con.query("SELECT sum(TIME_TO_SEC(TIMEDIFF(toc, tor))/3600) As downtime, line from test where tor > DATE_SUB(NOW(), INTERVAL 1 WEEK) group by line; ", function (err, rows, fields)
+    con.query("SELECT count(category) AS count, category FROM test where date(tor) = DATE(NOW() - INTERVAL 1 DAY) GROUP BY category; ", function (err, rows, fields)
         {
         if (err) throw err;
         for (var i=0; i< rows.length; i++)
             {
-                var no = rows[i].line;
-                var val = rows[i].downtime;
-                dataList.push(no);
-                dataList1.push(val);
-            }
-            var data = {
-                labels: dataList,
-                series: [dataList1]
-            };
-                 
-        res.send(data);
-
-        });
-
-});
-
-
-router.post('/pie', (req, res) => {
-    var dataList=[];
-    var dataList1=[];
-
-    con.query("SELECT count(line) AS count, line FROM test GROUP BY line; ", function (err, rows, fields)
-        {
-        if (err) throw err;
-        for (var i=0; i< rows.length; i++)
-            {
-                var no = rows[i].line;
-                var val = rows[i].count;
-                dataList.push(no);
-                dataList1.push(val);
+                var category = rows[i].category;
+                var count = rows[i].count;
+                dataList.push(category);
+                dataList1.push(count);
             }
             var data = {
                 labels: dataList,
@@ -110,4 +101,167 @@ router.post('/pie', (req, res) => {
         });
 
 });
+
+
+router.post('/weeklinechart', (req, res) => {
+    var dataList=[];
+    var dataList1=[];
+
+    con.query(" SELECT count(line) AS count, line FROM test where date(tor) > DATE(NOW() - INTERVAL 7 DAY) GROUP BY line  ", function (err, rows, fields)
+        {
+        if (err) throw err;
+        for (var i=0; i< rows.length; i++)
+            {
+                var no = rows[i].line;
+                var val = rows[i].count;
+                dataList.push(no);
+                dataList1.push(val);
+            }
+            // con.query(" SELECT count(line) AS count, line FROM test GROUP BY line ", function (err, rows, fields)
+            var data = {
+                labels: dataList,
+                series: [dataList1]
+            };
+                    
+        res.send(data);
+
+        });
+
+});
+
+
+router.post('/weekcatpie', (req, res) => {
+    var dataList=[];
+    var dataList1=[];
+
+    con.query("SELECT count(category) AS count, category FROM test where date(tor) > DATE(NOW() - INTERVAL 7 DAY) GROUP BY category; ", function (err, rows, fields)
+        {
+        if (err) throw err;
+        for (var i=0; i< rows.length; i++)
+            {
+                var category = rows[i].category;
+                var count = rows[i].count;
+                dataList.push(category);
+                dataList1.push(count);
+            }
+            var data = {
+                labels: dataList,
+                series: dataList1
+            };
+         
+                    
+        res.send(data);
+
+        });
+
+});
+
+router.post('/monthlinechart', (req, res) => {
+    var dataList=[];
+    var dataList1=[];
+
+    con.query(" SELECT count(line) AS count, line FROM test where date(tor) > DATE(NOW() - INTERVAL 30 DAY) GROUP BY line  ", function (err, rows, fields)
+        {
+        if (err) throw err;
+        for (var i=0; i< rows.length; i++)
+            {
+                var no = rows[i].line;
+                var val = rows[i].count;
+                dataList.push(no);
+                dataList1.push(val);
+            }
+            // con.query(" SELECT count(line) AS count, line FROM test GROUP BY line ", function (err, rows, fields)
+            var data = {
+                labels: dataList,
+                series: [dataList1]
+            };
+                    
+        res.send(data);
+
+        });
+
+});
+
+
+router.post('/monthcatpie', (req, res) => {
+    var dataList=[];
+    var dataList1=[];
+
+    con.query("SELECT count(category) AS count, category FROM test where date(tor) > DATE(NOW() - INTERVAL 30 DAY) GROUP BY category; ", function (err, rows, fields)
+        {
+        if (err) throw err;
+        for (var i=0; i< rows.length; i++)
+            {
+                var category = rows[i].category;
+                var count = rows[i].count;
+                dataList.push(category);
+                dataList1.push(count);
+            }
+            var data = {
+                labels: dataList,
+                series: dataList1
+            };
+         
+                    
+        res.send(data);
+
+        });
+
+});
+
+
+router.post('/yearlinechart', (req, res) => {
+    var dataList=[];
+    var dataList1=[];
+
+    con.query(" SELECT count(line) AS count, line FROM test where date(tor) > DATE(NOW() - INTERVAL 30 DAY) GROUP BY line  ", function (err, rows, fields)
+        {
+        if (err) throw err;
+        for (var i=0; i< rows.length; i++)
+            {
+                var no = rows[i].line;
+                var val = rows[i].count;
+                dataList.push(no);
+                dataList1.push(val);
+            }
+            // con.query(" SELECT count(line) AS count, line FROM test GROUP BY line ", function (err, rows, fields)
+            var data = {
+                labels: dataList,
+                series: [dataList1]
+            };
+                    
+        res.send(data);
+
+        });
+
+});
+
+
+router.post('/yearcatpie', (req, res) => {
+    var dataList=[];
+    var dataList1=[];
+
+    con.query("SELECT count(category) AS count, category FROM test where date(tor) > DATE(NOW() - INTERVAL 30 DAY) GROUP BY category; ", function (err, rows, fields)
+        {
+        if (err) throw err;
+        for (var i=0; i< rows.length; i++)
+            {
+                var category = rows[i].category;
+                var count = rows[i].count;
+                dataList.push(category);
+                dataList1.push(count);
+            }
+            var data = {
+                labels: dataList,
+                series: dataList1
+            };
+         
+                    
+        res.send(data);
+
+        });
+
+});
+
+
     module.exports = router;

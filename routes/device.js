@@ -7,11 +7,20 @@ var client = require('../mqtt.js'); // importing my mqtt conf from mqtt.js
 
 
 router.get('/', (req, res) => {
-    res.send(req.params.a);
-});
-router.get('/:line/:no', (req, res) => {
-    let line = req.params.line;
-   let  line_no = req.params.no;
+
+
+    res.render('deviceconf.hbs', {
+        pageTitle: 'FaultResS- Device',
+        name: 'Faultress | Device Controller Configuration Panel'        
+         });
+        
+    });
+
+
+
+router.post('/conf', (req, res) => {
+    let line = req.body.line;
+   let  line_no = req.body.no;
     res.render('device.hbs', {
         pageTitle: 'FaultResS- Device',
         name: 'Faultress | Device Controller',
@@ -33,7 +42,7 @@ router.post('/mqtt', (req, res) => {
     // console.log("sent");
     // res to send stuff to the browser
 // res.json({ msg: "We receive your data", data: user });
-
+res.setTimeout(0);
 });
 
 
