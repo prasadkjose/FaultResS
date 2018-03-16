@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> header}}
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist-plugin-legend/0.6.2/chartist-plugin-legend.min.js"></script>
+
+     <link rel="stylesheet" href="charts.css">
+<style>
+
+</style>
+   
+<body>
+    <div class="container body1">
+      <br> 
+      <div class="container" style="width:95%;" >
+        <center>
+            <h3>Analytics : {{date}}</h3>  <br><br>      
+        <div class="row">
+            <div class="col-md-5">
+                <div id="graph-top" class="ct-chart ct-minor-sixth " ></div> 
+            </div>
+            <div class="col-md-3">
+                <ul id="faultByLineDay"> </ul><br>
+                <ul id="faultByCategoryDay"> </ul>                 
+            </div>
+            <div class="col-md-4">
+                <div id="pie-cat-countbyline" class="ct-chart ct-square " ></div>
+            </div>
+        </div>  <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <h4>FIlter Line</h4>
+                <div id="barFilter" class="ct-chart ct-minor-sixth " ></div> 
+            </div>               
+            <div class="col-md-4">
+                <h4>RFM Line</h4>
+                <div id="barRFM" class="ct-chart ct-minor-sixth " ></div> 
+            </div>
+            <div class="col-md-4">
+                <h4>Packing Machine</h4>
+                <div id="barPacking" class="ct-chart ct-minor-sixth " ></div> 
+            </div>
+        </div><hr>
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Thermal Cell</h4>
+                    <div id="barThermal" class="ct-chart ct-minor-sixth " ></div> 
+            </div>
+            <div class="col-md-4">
+                <h4>7/16 Correction Line</h4>
+                <div id="barCorrection" class="ct-chart ct-minor-sixth " ></div> 
+            </div> 
+
+        </div>
+                      
+                
+
+                
+        </center>       
+        </div>
+           
+      </div> 
+      <br> 
+      
+
+             
+    </div>
+      
+</body>
+
+
+
+
+
+
+
+ <script>
+  
+    </script>
+    {{> analysis_date}}
+
+  </html>

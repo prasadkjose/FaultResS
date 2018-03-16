@@ -10,7 +10,7 @@ var options1 = {
    };
 var data1 = {
   labels: [],
-  series: [[]]
+  series: [[],[]]
 }   
 
 new Chartist.Bar('#graph-top', data1 , options1 );

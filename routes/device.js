@@ -68,6 +68,8 @@ router.get('/mqtt-ack/:line/:no', (req, res) =>
           var json = msg;
           res.write("data:" + json + "\n\n");
         });
+        client.setMaxListeners(0);
+
       });
 
 });

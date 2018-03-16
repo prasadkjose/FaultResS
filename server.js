@@ -8,7 +8,8 @@ var analysis = require('./routes/analysis.js');
 var bodyParser = require('body-parser');
 var mqtt1 = require('./routes/mqtt.js');
 var device = require('./routes/device.js');
-var date = require('./routes/date.js');
+var analysisbydate = require('./routes/analysisdate.js');
+var analysisbymonth = require('./routes/analysismonth.js');
 
 
 
@@ -50,7 +51,9 @@ app.post('/date',admin);
 app.post('/tech',admin);
 app.post('/line',admin);
 
-app.use('/faultbydate',date);
+app.use('/analysisbydate',analysisbydate);
+app.use('/analysisbymonth',analysisbymonth);
+
 
  
 

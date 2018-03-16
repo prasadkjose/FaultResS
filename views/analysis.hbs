@@ -17,13 +17,16 @@
       <div class="container" style="width:95%;" >
         <center>
         <h2>Whole Factory</h2>
-        <h3>Statistics on   {{date}}</h3>    
+        <h3>Analytics on   {{date}}</h3>    
             <br><br>
-            <form method="POST" action="/faultbydate">
-                <input type="date" id="date" name="date">
-                <button id="dateSubmit">date</button>
-                
-            </form>
+            {{!-- <p>Select desired date</p> --}}
+            <div class="form-group" data-toggle="tooltip" title="Select date for Analytics">
+                <form   method="POST" action="/analysisbydate">
+                    <input class="form-control" type="date" id="date" name="date"> <br>
+                    <button class="btn btn-primary" id="dateSubmit">date</button>                
+                </form>  
+            </div>
+            <br><br>
             <div class="row">
                 <div class="col-md-5">
                     <div id="graph-top" class="ct-chart ct-minor-sixth " ></div> 
@@ -39,7 +42,7 @@
             <hr>
 
             
-            <h3>Weekly Statistics from {{week}}</h3><br><br>
+            <h3>Weekly Analytics from {{week}}</h3><br><br>
              <div class="row">
                 <div class="col-md-4">
                     <div id="pie-cat-countbylineWeek" class="ct-chart ct-square " ></div>  
@@ -55,7 +58,13 @@
             <hr>
 
 
-             <h3>Monthly Statistics from  {{month}} </h3><br><br>
+             <h3>Monthly Analytics from  {{month}} </h3><br><br>
+              <div class="form-group" data-toggle="tooltip" title="Select Month for Analytics">
+                <form   method="POST" action="/analysisbymonth">
+                    <input class="form-control" type="month" id="month" name="month" placeholder="2018-03"> <br>
+                    <button class="btn btn-primary" id="dateSubmit">Month</button>                
+                </form>  
+            </div>
              <div class="row">
                 <div class="col-md-5">
                     <div id="graphFaultByLineMonth" class="ct-chart ct-minor-sixth " ></div>
@@ -71,7 +80,7 @@
             <hr>
 
 
-             <h3> Statistics from {{year}}</h3><br><br>
+             <h3> Analytics from {{year}}</h3><br><br>
              <div class="row">
                 <div class="col-md-4">
                     <div id="pie-cat-countbylineYear" class="ct-chart ct-square " ></div>  
@@ -100,9 +109,13 @@
 
 
 
-
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
  <script>
   
     </script>
-{{> footer}}
+{{> analysis_chart_main}}
  </html>
