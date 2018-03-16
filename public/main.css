@@ -75,7 +75,16 @@ b, strong {
 
 
 }
-
+.nav-buttons
+{
+  margin-top: 2vh;
+ }
+ .logo_garage_nav
+ {
+   height: 10vh;
+   padding: 5px 30px;
+   
+ }
 .a{
     border: none;
     background: #18121E;
